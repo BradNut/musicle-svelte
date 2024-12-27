@@ -6,9 +6,28 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
-	import ThemeDropdown from '@/components/theme-dropdown.svelte';
+	import { createMutation } from '@tanstack/svelte-query';
+	import { authContext } from '$lib/hooks/session.svelte.js';
+	import { queryHandler } from '$lib/tanstack-query/index.js';
+	import { goto, invalidateAll } from '$app/navigation';
+	import UserAvatar from '$lib/components/user-avatar.svelte';
+	import ThemeDropdown from '$lib/components/theme-dropdown.svelte';
 
 	const { children, data } = $props();
+
+	$effect.pre(() => {
+		authContext.setAuthedUser(data.authedUser);
+	});
+
+	const logoutMutation = createMutation({
+		...queryHandler().iam.logout(),
+		onSuccess: async () => {
+			await data.queryClient.invalidateQueries();
+			invalidateAll();
+			goto('/login');
+		}
+	});
+	queryHandler;
 </script>
 
 <div class="flex min-h-screen w-full flex-col">
@@ -71,7 +90,7 @@
 				<DropdownMenu.Root>
 					<DropdownMenu.Trigger>
 						<Button variant="secondary" size="icon" class="rounded-lg">
-							<!-- <UserAvatar class="h-8 w-8 rounded-lg" user={data.authedUser} /> -->
+							<UserAvatar class="h-8 w-8 rounded-lg" user={data.authedUser} />
 							<span class="sr-only">Toggle user menu</span>
 						</Button>
 					</DropdownMenu.Trigger>
@@ -82,7 +101,7 @@
 							</DropdownMenu.Item>
 							<DropdownMenu.Separator />
 							<DropdownMenu.Item >Logout</DropdownMenu.Item>
-							<!-- onclick={$logoutMutation.mutate} -->
+							onclick={$logoutMutation.mutate}
 						</DropdownMenu.Group>
 					</DropdownMenu.Content>
 				</DropdownMenu.Root>
