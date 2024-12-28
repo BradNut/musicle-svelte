@@ -2,7 +2,7 @@ import { inject, injectable } from '@needle-di/core';
 import { LoginRequestsRepository } from './login-requests.repository';
 import { MailerService } from '../../mail/mailer.service';
 import { LoginVerificationEmail } from '../../mail/templates/login-verification.template';
-import { BadRequest } from '../../common/utils/exceptions';
+import { BadRequest, NotFound } from '../../common/utils/exceptions';
 import { WelcomeEmail } from '../../mail/templates/welcome.template';
 import { SessionsService } from '../sessions/sessions.service';
 import type { VerifyLoginRequestDto } from './dtos/verify-login-request.dto';
@@ -10,17 +10,42 @@ import type { CreateLoginRequestDto } from './dtos/create-login-request.dto';
 import { UsersService } from '../../users/users.service';
 import { UsersRepository } from '../../users/users.repository';
 import { VerificationCodesService } from '../../common/services/verification-codes.service';
+import type { LoginRequestDto } from './dtos/login-request.dto';
+import { CredentialsRepository } from '../../users/credentials.repository';
 
 @injectable()
 export class LoginRequestsService {
   constructor(
+    private credentialsRepository = inject(CredentialsRepository),
     private loginRequestsRepository = inject(LoginRequestsRepository),
     private usersRepository = inject(UsersRepository),
     private verificationCodesService = inject(VerificationCodesService),
     private usersService = inject(UsersService),
     private sessionsService = inject(SessionsService),
-    private mailer = inject(MailerService)
+    private mailer = inject(MailerService),
   ) {}
+
+  async login({ email, password }: LoginRequestDto) {
+    const existingUser = await this.usersRepository.findOneByEmail(email);
+
+    if (!existingUser) {
+      throw NotFound('User not found');
+    }
+
+    const credential = await this.credentialsRepository.findPasswordCredentialsByUserId(existingUser.id);
+
+    if (!credential) {
+      throw BadRequest('Invalid credentials');
+    }
+
+    if (!(await this.tokensService.verifyHashedToken(credential.secret_data, data.password))) {
+      throw BadRequest('Invalid credentials');
+    }
+
+    const totpCredentials = await this.credentialsRepository.findTOTPCredentialsByUserId(existingUser.id);
+
+    return this.authExistingUser({ userId: existingUser.id });
+  }
 
   async verify({ email, code }: VerifyLoginRequestDto) {
     // find the hashed verification code for the email
@@ -32,7 +57,7 @@ export class LoginRequestsService {
     // verify the code
     const isValid = await this.verificationCodesService.verify({
       verificationCode: code,
-      hashedVerificationCode: loginRequest.hashedCode
+      hashedVerificationCode: loginRequest.hashedCode,
     });
 
     // if the code is invalid, throw an error
@@ -45,9 +70,7 @@ export class LoginRequestsService {
     const existingUser = await this.usersRepository.findOneByEmail(email);
 
     // if the user exists, log them in, otherwise create a new user and log them in
-    return existingUser
-      ? this.authExistingUser({ userId: existingUser.id })
-      : this.authNewUser({ email });
+    return existingUser ? this.authExistingUser({ userId: existingUser.id }) : this.authNewUser({ email });
   }
 
   async sendVerificationCode({ email }: CreateLoginRequestDto) {
@@ -55,19 +78,18 @@ export class LoginRequestsService {
     await this.loginRequestsRepository.delete(email);
 
     // generate a new verification code and hash
-    const { verificationCode, hashedVerificationCode } =
-      await this.verificationCodesService.generateCodeWithHash();
+    const { verificationCode, hashedVerificationCode } = await this.verificationCodesService.generateCodeWithHash();
 
     // create a new login request
     await this.loginRequestsRepository.set({
       email,
-      hashedCode: hashedVerificationCode
+      hashedCode: hashedVerificationCode,
     });
 
     // send the verification email
     await this.mailer.send({
       to: email,
-      template: new LoginVerificationEmail(verificationCode)
+      template: new LoginVerificationEmail(verificationCode),
     });
   }
 
@@ -78,7 +100,7 @@ export class LoginRequestsService {
     // send the welcome email
     await this.mailer.send({
       to: email,
-      template: new WelcomeEmail()
+      template: new WelcomeEmail(),
     });
 
     // create a new session

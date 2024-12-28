@@ -2,8 +2,13 @@
 	import { z } from 'zod';
 
 	export const loginSchema = z.object({
-		email: z.string().email()
+		email: z.string().email(),
 	});
+
+	export const loginPasswordSchema = z.object({
+		email: z.string().email(),
+		password: z.string({ required_error: 'Password is required' }),
+	})
 
 	export const verifySchema = z.object({
 		email: z.string().email(),
@@ -27,13 +32,22 @@
 	const RESEND_VERIFICATION_CODE_COOLDOWN = 60;
 
 	let queryClient = useQueryClient();
-	let step = $state<'request' | 'verify'>('request');
+	let step = $state<'login' | 'request' | 'verify'>('request');
 	let countdownTimer = $state(RESEND_VERIFICATION_CODE_COOLDOWN);
 	let resendVerificationCodeOnCooldown = $derived(
 		countdownTimer != RESEND_VERIFICATION_CODE_COOLDOWN
 	);
 
 	/* ----------------------------------- Api ---------------------------------- */
+	const requestUsernamePasswordLoginMutation = createMutation({
+		...queryHandler().iam.requestUsernamePasswordLogin(),
+		onSuccess(_data, variables, _context) {
+			step = 'verify';
+			$verifyForm.email = variables.json.email;
+			$verifyForm.
+		}
+	})
+
 	const requestMutation = createMutation({
 		...queryHandler().iam.requestLogin(),
 		onSuccess(_data, variables, _context) {
@@ -58,6 +72,16 @@
 	});
 
 	/* ------------------------------- Login Form ------------------------------- */
+	const sf_login_username_password = superForm(defaults(zod(loginPasswordSchema)), {
+		resetForm: false,
+		SPA: true,
+		validators: zod(loginPasswordSchema),
+		async onUpdated(event) {
+			if (!event.form.valid) return;
+			await $requestUsernamePasswordLogin.mutateAsync({ json: event.form.data });
+		}
+	})
+
 	const sf_login = superForm(defaults(zod(loginSchema)), {
 		resetForm: false,
 		SPA: true,
@@ -78,6 +102,8 @@
 			$verifyForm.email = event.form.data.email;
 		}
 	});
+	const { form: loginPasswordForm, enhance: loginPasswordEnhance, errors: loginPasswordErrors } = sf_login_username_password;
+
 	const { form: loginForm, enhance: loginEnhance, errors: requestErrors } = sf_login;
 
 	/* ------------------------------- Verify Form ------------------------------ */
@@ -118,14 +144,51 @@
 	}
 </script>
 
+{#if step === 'login'}
+	{@render loginCard()}
+{/if}
 {#if step === 'request'}
-	{@render requetsCard()}
+	{@render requestsCard()}
 {/if}
 {#if step === 'verify'}
 	{@render verifyCard()}
 {/if}
 
-{#snippet requetsCard()}
+{#snippet loginCard()}
+	<Card.Root class="mx-auto w-full max-w-sm">
+		<Card.Header>
+			<Card.Title class="text-2xl">Login</Card.Title>
+			<Card.Description>Enter your email below to login to your account</Card.Description>
+		</Card.Header>
+		<Card.Content>
+			<form use:loginEnhance method="POST" class="grid gap-4">
+				<Form.Field form={sf_login_username_password} name="email">
+					<Form.Control>
+						{#snippet children({ props })}
+							<Form.Label>Email</Form.Label>
+							<Input {...props} bind:value={$loginPasswordForm.email} />
+						{/snippet}
+					</Form.Control>
+					<Form.Description />
+					<Form.FieldErrors />
+				</Form.Field>
+				<Form.Field form={sf_login_username_password} name="password">
+					<Form.Control>
+						{#snippet children({ props })}
+							<Form.Label>Password</Form.Label>
+							<Input type="password" {...props} bind:value={$loginPasswordForm.password} />
+						{/snippet}
+					</Form.Control>
+					<Form.Description />
+					<Form.FieldErrors />
+				</Form.Field>
+				<Button type="submit" class="w-full">Continue with Email</Button>
+			</form>
+		</Card.Content>
+	</Card.Root>
+{/snippet}
+
+{#snippet requestsCard()}
 	<Card.Root class="mx-auto w-full max-w-sm">
 		<Card.Header>
 			<Card.Title class="text-2xl">Login</Card.Title>

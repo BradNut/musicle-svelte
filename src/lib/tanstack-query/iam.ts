@@ -6,6 +6,7 @@ import { TanstackQueryModule } from './query-module';
 /* -------------------------------------------------------------------------- */
 /*                                    Types                                   */
 /* -------------------------------------------------------------------------- */
+type RequestUsernamePasswordLogin = Api['iam']['login']['$post'];
 type RequestLogin = Api['iam']['login']['request']['$post'];
 type VerifyLogin = Api['iam']['login']['verify']['$post'];
 type Logout = Api['iam']['logout']['$post'];
@@ -18,6 +19,12 @@ export class IamModule extends TanstackQueryModule<'iam'> {
 		return {
 			mutationFn: async () => await this.api.iam.logout.$post().then(parseApiResponse)
 		};
+	}
+	requestUsernamePasswordLogin(): ApiMutation<RequestUsernamePasswordLogin> {
+		return {
+			mutationFn: async (data: InferRequestType<RequestUsernamePasswordLogin>) =>
+				await this.api.iam.login.$post(data).then(parseApiResponse)
+		}
 	}
 	requestLogin(): ApiMutation<RequestLogin> {
 		return {
