@@ -14,7 +14,12 @@ export default defineConfig({
   dialect: 'postgresql',
   casing: 'snake_case',
   dbCredentials: {
-    url: process.env.DATABASE_URL ?? '',
+    host: process.env.DATABASE_HOST || 'localhost',
+    port: Number(process.env.DATABASE_PORT) || 5432,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE_DB || 'boredgame',
+    ssl: process.env.DATABASE_HOST !== 'localhost',
   },
   migrations: {
     table: 'migrations',

@@ -2,12 +2,12 @@ import { boolean, pgTable, text } from 'drizzle-orm/pg-core';
 import { getTableColumns, type InferSelectModel, relations } from 'drizzle-orm';
 import { citext, id, timestamps } from '../../common/utils/drizzle';
 import { generateId } from '../../common/utils/crypto';
-import { user_roles } from './user-roles.table';
+import { user_roles_table } from './user-roles.table';
 
 /* -------------------------------------------------------------------------- */
 /*                                    Table                                   */
 /* -------------------------------------------------------------------------- */
-export const usersTable = pgTable('users', {
+export const users_table = pgTable('users', {
   id: id()
     .primaryKey()
     .$defaultFn(() => generateId()),
@@ -24,17 +24,17 @@ export const usersTable = pgTable('users', {
 /* -------------------------------------------------------------------------- */
 /*                                  Relations                                 */
 /* -------------------------------------------------------------------------- */
-export const userRelations = relations(usersTable, ({ many }) => ({
-  user_roles: many(user_roles),
+export const userRelations = relations(users_table, ({ many }) => ({
+  user_roles: many(user_roles_table),
 }));
 
 /* -------------------------------------------------------------------------- */
 /*                                    Types                                   */
 /* -------------------------------------------------------------------------- */
-export type User = InferSelectModel<typeof usersTable>;
+export type User = InferSelectModel<typeof users_table>;
 export type UserWithRelations = User & {};
 
-const userColumns = getTableColumns(usersTable);
+const userColumns = getTableColumns(users_table);
 
 export const publicUserColumns = {
   id: userColumns.id,
