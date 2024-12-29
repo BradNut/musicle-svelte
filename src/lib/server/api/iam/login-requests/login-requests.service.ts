@@ -12,6 +12,7 @@ import { UsersRepository } from '../../users/users.repository';
 import { VerificationCodesService } from '../../common/services/verification-codes.service';
 import type { LoginRequestDto } from './dtos/login-request.dto';
 import { CredentialsRepository } from '../../users/credentials.repository';
+import { TokensService } from '../../common/services/tokens.service';
 
 @injectable()
 export class LoginRequestsService {
@@ -22,6 +23,7 @@ export class LoginRequestsService {
     private verificationCodesService = inject(VerificationCodesService),
     private usersService = inject(UsersService),
     private sessionsService = inject(SessionsService),
+    private tokensService = inject(TokensService),
     private mailer = inject(MailerService),
   ) {}
 
@@ -38,7 +40,7 @@ export class LoginRequestsService {
       throw BadRequest('Invalid credentials');
     }
 
-    if (!(await this.tokensService.verifyHashedToken(credential.secret_data, data.password))) {
+    if (!(await this.tokensService.verifyHashedToken(credential.secret_data, password))) {
       throw BadRequest('Invalid credentials');
     }
 

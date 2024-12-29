@@ -28,11 +28,12 @@
 	import ChevronLeftIcon from 'lucide-svelte/icons/chevron-left';
 	import { queryHandler } from '$lib/tanstack-query';
 	import * as InputOTP from '$lib/components/ui/input-otp/index.js';
+	import Separator from '@/components/ui/separator/separator.svelte';
 
 	const RESEND_VERIFICATION_CODE_COOLDOWN = 60;
 
 	let queryClient = useQueryClient();
-	let step = $state<'login' | 'request' | 'verify'>('request');
+	let step = $state<'login' | 'totp' | 'request' | 'verify'>('request');
 	let countdownTimer = $state(RESEND_VERIFICATION_CODE_COOLDOWN);
 	let resendVerificationCodeOnCooldown = $derived(
 		countdownTimer != RESEND_VERIFICATION_CODE_COOLDOWN
@@ -42,9 +43,12 @@
 	const requestUsernamePasswordLoginMutation = createMutation({
 		...queryHandler().iam.requestUsernamePasswordLogin(),
 		onSuccess(_data, variables, _context) {
-			step = 'verify';
-			$verifyForm.email = variables.json.email;
-			$verifyForm.
+			step = 'totp';
+			$loginPasswordForm.email = variables.json.email;
+			$loginPasswordForm.password = variables.json.password;
+		},
+		onError(error) {
+			loginPasswordErrors.set({ email: [error.message] });
 		}
 	})
 
@@ -71,16 +75,29 @@
 		}
 	});
 
-	/* ------------------------------- Login Form ------------------------------- */
+	/* ------------------------------- Login Password Form ------------------------------- */
 	const sf_login_username_password = superForm(defaults(zod(loginPasswordSchema)), {
 		resetForm: false,
 		SPA: true,
 		validators: zod(loginPasswordSchema),
 		async onUpdated(event) {
-			if (!event.form.valid) return;
-			await $requestUsernamePasswordLogin.mutateAsync({ json: event.form.data });
+			if (!event.form.valid) {
+				return;
+			}
+			await $requestUsernamePasswordLoginMutation.mutateAsync({ json: event.form.data });
+
+			if ($requestUsernamePasswordLoginMutation.error) {
+				return setError(event.form, 'email', $requestUsernamePasswordLoginMutation.error.message);
+			}
+
+			step = 'totp';
+			$loginPasswordForm.email = event.form.data.email;
 		}
 	})
+
+		const { form: loginPasswordForm, enhance: loginPasswordEnhance, errors: loginPasswordErrors } = sf_login_username_password;
+
+	/* ------------------------------- Login Form ------------------------------- */
 
 	const sf_login = superForm(defaults(zod(loginSchema)), {
 		resetForm: false,
@@ -95,14 +112,14 @@
 				}
 			});
 
-			if ($requestMutation.error)
+			if ($requestMutation.error) {
 				return setError(event.form, 'email', $requestMutation.error.message);
+			}
 
 			step = 'verify';
 			$verifyForm.email = event.form.data.email;
 		}
 	});
-	const { form: loginPasswordForm, enhance: loginPasswordEnhance, errors: loginPasswordErrors } = sf_login_username_password;
 
 	const { form: loginForm, enhance: loginEnhance, errors: requestErrors } = sf_login;
 
@@ -161,7 +178,7 @@
 			<Card.Description>Enter your email below to login to your account</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<form use:loginEnhance method="POST" class="grid gap-4">
+			<form use:loginPasswordEnhance method="POST" class="grid gap-4">
 				<Form.Field form={sf_login_username_password} name="email">
 					<Form.Control>
 						{#snippet children({ props })}
@@ -182,7 +199,9 @@
 					<Form.Description />
 					<Form.FieldErrors />
 				</Form.Field>
-				<Button type="submit" class="w-full">Continue with Email</Button>
+				<Button type="submit" class="w-full">Submit</Button>
+				<Separator class="my-4" />
+				<Button type="button" onclick={() => (step = 'request')}>Login with Email</Button>
 			</form>
 		</Card.Content>
 	</Card.Root>
@@ -207,6 +226,8 @@
 					<Form.FieldErrors />
 				</Form.Field>
 				<Button type="submit" class="w-full">Continue with Email</Button>
+				<Separator class="my-4" />
+				<Button type="button" onclick={() => (step = 'login')}>Login with Username & Password</Button>
 			</form>
 		</Card.Content>
 	</Card.Root>

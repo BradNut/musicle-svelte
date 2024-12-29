@@ -10,16 +10,16 @@ importers:
     dependencies:
       '@hono/swagger-ui':
         specifier: ^0.5.0
-        version: 0.5.0(hono@4.6.14)
+        version: 0.5.0(hono@4.6.15)
       '@hono/zod-openapi':
         specifier: ^0.18.3
-        version: 0.18.3(hono@4.6.14)(zod@3.24.1)
+        version: 0.18.3(hono@4.6.15)(zod@3.24.1)
       '@hono/zod-validator':
         specifier: ^0.4.2
-        version: 0.4.2(hono@4.6.14)(zod@3.24.1)
+        version: 0.4.2(hono@4.6.15)(zod@3.24.1)
       '@inlang/paraglide-sveltekit':
         specifier: ^0.15.0
-        version: 0.15.0(@sveltejs/kit@2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))
+        version: 0.15.0(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))
       '@needle-di/core':
         specifier: ^0.8.4
         version: 0.8.4
@@ -46,7 +46,7 @@ importers:
         version: 1.0.0
       '@scalar/hono-api-reference':
         specifier: ^0.5.162
-        version: 0.5.165(hono@4.6.14)
+        version: 0.5.165(hono@4.6.15)
       '@tailwindcss/container-queries':
         specifier: ^0.1.1
         version: 0.1.1(tailwindcss@3.4.17)
@@ -75,17 +75,17 @@ importers:
         specifier: ^0.6.1
         version: 0.6.1(drizzle-orm@0.38.3(@types/pg@8.11.10)(@types/react@19.0.2)(pg@8.13.1)(postgres@3.4.5)(react@18.3.1))(zod@3.24.1)
       hono:
-        specifier: ^4.6.14
-        version: 4.6.14
+        specifier: ^4.6.15
+        version: 4.6.15
       hono-pino:
         specifier: ^0.7.0
-        version: 0.7.0(hono@4.6.14)(pino@9.6.0)
+        version: 0.7.0(hono@4.6.15)(pino@9.6.0)
       hono-rate-limiter:
         specifier: ^0.4.2
-        version: 0.4.2(hono@4.6.14)
+        version: 0.4.2(hono@4.6.15)
       hono-zod-openapi:
         specifier: ^0.5.0
-        version: 0.5.0(hono@4.6.14)(zod@3.24.1)
+        version: 0.5.0(hono@4.6.15)(zod@3.24.1)
       ioredis:
         specifier: ^5.4.2
         version: 5.4.2
@@ -121,7 +121,7 @@ importers:
         version: 0.33.5
       stoker:
         specifier: ^1.4.2
-        version: 1.4.2(@asteasolutions/zod-to-openapi@7.3.0(zod@3.24.1))(@hono/zod-openapi@0.18.3(hono@4.6.14)(zod@3.24.1))(hono@4.6.14)(openapi3-ts@4.4.0)
+        version: 1.4.2(@asteasolutions/zod-to-openapi@7.3.0(zod@3.24.1))(@hono/zod-openapi@0.18.3(hono@4.6.15)(zod@3.24.1))(hono@4.6.15)(openapi3-ts@4.4.0)
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.9.4
@@ -167,13 +167,13 @@ importers:
         version: 8.4.7(storybook@8.4.7)
       '@sveltejs/adapter-node':
         specifier: ^5.2.9
-        version: 5.2.11(@sveltejs/kit@2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))
+        version: 5.2.11(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))
       '@sveltejs/enhanced-img':
         specifier: ^0.4.4
         version: 0.4.4(rollup@4.29.1)(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))
       '@sveltejs/kit':
-        specifier: ^2.9.0
-        version: 2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))
+        specifier: ^2.15.1
+        version: 2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.3
         version: 5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))
@@ -212,7 +212,7 @@ importers:
         version: 0.30.1
       formsnap:
         specifier: ^2.0.0
-        version: 2.0.0(svelte@5.16.0)(sveltekit-superforms@2.22.1(@sveltejs/kit@2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.16.0)(typescript@5.7.2))
+        version: 2.0.0(svelte@5.16.0)(sveltekit-superforms@2.22.1(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.16.0)(typescript@5.7.2))
       lucide-svelte:
         specifier: ^0.469.0
         version: 0.469.0(svelte@5.16.0)
@@ -239,10 +239,10 @@ importers:
         version: 0.3.28(svelte@5.16.0)
       sveltekit-flash-message:
         specifier: ^2.4.4
-        version: 2.4.4(@sveltejs/kit@2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)
+        version: 2.4.4(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)
       sveltekit-superforms:
         specifier: ^2.22.1
-        version: 2.22.1(@sveltejs/kit@2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.16.0)(typescript@5.7.2)
+        version: 2.22.1(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.16.0)(typescript@5.7.2)
       tailwind-merge:
         specifier: ^2.6.0
         version: 2.6.0
@@ -2160,8 +2160,8 @@ packages:
       svelte: ^5.0.0
       vite: '>= 5.0.0'
 
-  '@sveltejs/kit@2.15.0':
-    resolution: {integrity: sha512-FI1bhfhFNGI2sKg+BhiRyM4eaOvX+KZqRYSQqL5PK3ZZREX2xufZ6MzZAw79N846OnIxYNqcz/3VOUq+FPDd3w==}
+  '@sveltejs/kit@2.15.1':
+    resolution: {integrity: sha512-8t7D3hQHbUDMiaQ2RVnjJJ/+Ur4Fn/tkeySJCsHtX346Q9cp3LAnav8xXdfuqYNJwpUGX0x3BqF1uvbmXQw93A==}
     engines: {node: '>=18.13'}
     hasBin: true
     peerDependencies:
@@ -3411,8 +3411,8 @@ packages:
       hono: ^4.6.10
       zod: ^3.21.4
 
-  hono@4.6.14:
-    resolution: {integrity: sha512-j4VkyUp2xazGJ8eCCLN1Vm/bxdvm/j5ZuU9AIjLu9vapn2M44p9L3Ktr9Vnb2RN2QtcR/wVjZVMlT5k7GJQgPw==}
+  hono@4.6.15:
+    resolution: {integrity: sha512-OiQwvAOAaI2JrABBH69z5rsctHDzFzIKJge0nYXgtzGJ0KftwLWcBXm1upJC23/omNRtnqM0gjRMbtXshPdqhQ==}
     engines: {node: '>=16.9.0'}
 
   hookable@5.5.3:
@@ -5724,20 +5724,20 @@ snapshots:
       '@hapi/hoek': 9.3.0
     optional: true
 
-  '@hono/swagger-ui@0.5.0(hono@4.6.14)':
+  '@hono/swagger-ui@0.5.0(hono@4.6.15)':
     dependencies:
-      hono: 4.6.14
+      hono: 4.6.15
 
-  '@hono/zod-openapi@0.18.3(hono@4.6.14)(zod@3.24.1)':
+  '@hono/zod-openapi@0.18.3(hono@4.6.15)(zod@3.24.1)':
     dependencies:
       '@asteasolutions/zod-to-openapi': 7.3.0(zod@3.24.1)
-      '@hono/zod-validator': 0.4.2(hono@4.6.14)(zod@3.24.1)
-      hono: 4.6.14
+      '@hono/zod-validator': 0.4.2(hono@4.6.15)(zod@3.24.1)
+      hono: 4.6.15
       zod: 3.24.1
 
-  '@hono/zod-validator@0.4.2(hono@4.6.14)(zod@3.24.1)':
+  '@hono/zod-validator@0.4.2(hono@4.6.15)(zod@3.24.1)':
     dependencies:
-      hono: 4.6.14
+      hono: 4.6.15
       zod: 3.24.1
 
   '@humanwhocodes/config-array@0.9.5':
@@ -5869,12 +5869,12 @@ snapshots:
       - babel-plugin-macros
       - debug
 
-  '@inlang/paraglide-sveltekit@0.15.0(@sveltejs/kit@2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))':
+  '@inlang/paraglide-sveltekit@0.15.0(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))':
     dependencies:
       '@inlang/paraglide-js': 1.11.3
       '@inlang/paraglide-vite': 1.3.0
       '@lix-js/client': 2.2.1
-      '@sveltejs/kit': 2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))
+      '@sveltejs/kit': 2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))
       commander: 12.1.0
       dedent: 1.5.1
       devalue: 4.3.3
@@ -6388,10 +6388,10 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.29.1':
     optional: true
 
-  '@scalar/hono-api-reference@0.5.165(hono@4.6.14)':
+  '@scalar/hono-api-reference@0.5.165(hono@4.6.15)':
     dependencies:
       '@scalar/types': 0.0.25
-      hono: 4.6.14
+      hono: 4.6.15
 
   '@scalar/openapi-types@0.1.5': {}
 
@@ -6690,12 +6690,12 @@ snapshots:
     dependencies:
       storybook: 8.4.7
 
-  '@sveltejs/adapter-node@5.2.11(@sveltejs/kit@2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))':
+  '@sveltejs/adapter-node@5.2.11(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))':
     dependencies:
       '@rollup/plugin-commonjs': 28.0.2(rollup@4.29.1)
       '@rollup/plugin-json': 6.1.0(rollup@4.29.1)
       '@rollup/plugin-node-resolve': 16.0.0(rollup@4.29.1)
-      '@sveltejs/kit': 2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))
+      '@sveltejs/kit': 2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))
       rollup: 4.29.1
 
   '@sveltejs/enhanced-img@0.4.4(rollup@4.29.1)(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))':
@@ -6710,7 +6710,7 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@sveltejs/kit@2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))':
+  '@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))':
     dependencies:
       '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))
       '@types/cookie': 0.6.0
@@ -7897,11 +7897,11 @@ snapshots:
       combined-stream: 1.0.8
       mime-types: 2.1.35
 
-  formsnap@2.0.0(svelte@5.16.0)(sveltekit-superforms@2.22.1(@sveltejs/kit@2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.16.0)(typescript@5.7.2)):
+  formsnap@2.0.0(svelte@5.16.0)(sveltekit-superforms@2.22.1(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.16.0)(typescript@5.7.2)):
     dependencies:
       svelte: 5.16.0
       svelte-toolbelt: 0.5.0(svelte@5.16.0)
-      sveltekit-superforms: 2.22.1(@sveltejs/kit@2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.16.0)(typescript@5.7.2)
+      sveltekit-superforms: 2.22.1(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.16.0)(typescript@5.7.2)
 
   forwarded@0.2.0: {}
 
@@ -7998,24 +7998,24 @@ snapshots:
 
   help-me@5.0.0: {}
 
-  hono-pino@0.7.0(hono@4.6.14)(pino@9.6.0):
+  hono-pino@0.7.0(hono@4.6.15)(pino@9.6.0):
     dependencies:
       defu: 6.1.4
-      hono: 4.6.14
+      hono: 4.6.15
       pino: 9.6.0
 
-  hono-rate-limiter@0.4.2(hono@4.6.14):
+  hono-rate-limiter@0.4.2(hono@4.6.15):
     dependencies:
-      hono: 4.6.14
+      hono: 4.6.15
 
-  hono-zod-openapi@0.5.0(hono@4.6.14)(zod@3.24.1):
+  hono-zod-openapi@0.5.0(hono@4.6.15)(zod@3.24.1):
     dependencies:
-      '@hono/zod-validator': 0.4.2(hono@4.6.14)(zod@3.24.1)
-      hono: 4.6.14
+      '@hono/zod-validator': 0.4.2(hono@4.6.15)(zod@3.24.1)
+      hono: 4.6.15
       zod: 3.24.1
       zod-openapi: 4.2.1(zod@3.24.1)
 
-  hono@4.6.14: {}
+  hono@4.6.15: {}
 
   hookable@5.5.3: {}
 
@@ -9024,13 +9024,13 @@ snapshots:
 
   std-env@3.8.0: {}
 
-  stoker@1.4.2(@asteasolutions/zod-to-openapi@7.3.0(zod@3.24.1))(@hono/zod-openapi@0.18.3(hono@4.6.14)(zod@3.24.1))(hono@4.6.14)(openapi3-ts@4.4.0):
+  stoker@1.4.2(@asteasolutions/zod-to-openapi@7.3.0(zod@3.24.1))(@hono/zod-openapi@0.18.3(hono@4.6.15)(zod@3.24.1))(hono@4.6.15)(openapi3-ts@4.4.0):
     dependencies:
       '@asteasolutions/zod-to-openapi': 7.3.0(zod@3.24.1)
-      hono: 4.6.14
+      hono: 4.6.15
       openapi3-ts: 4.4.0
     optionalDependencies:
-      '@hono/zod-openapi': 0.18.3(hono@4.6.14)(zod@3.24.1)
+      '@hono/zod-openapi': 0.18.3(hono@4.6.15)(zod@3.24.1)
 
   storybook@8.4.7:
     dependencies:
@@ -9223,14 +9223,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  sveltekit-flash-message@2.4.4(@sveltejs/kit@2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0):
+  sveltekit-flash-message@2.4.4(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0):
     dependencies:
-      '@sveltejs/kit': 2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))
+      '@sveltejs/kit': 2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))
       svelte: 5.16.0
 
-  sveltekit-superforms@2.22.1(@sveltejs/kit@2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.16.0)(typescript@5.7.2):
+  sveltekit-superforms@2.22.1(@sveltejs/kit@2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.16.0)(typescript@5.7.2):
     dependencies:
-      '@sveltejs/kit': 2.15.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))
+      '@sveltejs/kit': 2.15.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1)))(svelte@5.16.0)(vite@6.0.6(@types/node@22.10.2)(jiti@1.21.7)(tsx@4.19.2)(yaml@2.6.1))
       devalue: 5.1.1
       memoize-weak: 1.0.2
       svelte: 5.16.0
