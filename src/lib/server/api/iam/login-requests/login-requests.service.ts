@@ -1,18 +1,19 @@
 import { inject, injectable } from '@needle-di/core';
-import { LoginRequestsRepository } from './login-requests.repository';
+import { TokensService } from '../../common/services/tokens.service';
+import { VerificationCodesService } from '../../common/services/verification-codes.service';
+import { BadRequest, NotFound } from '../../common/utils/exceptions';
 import { MailerService } from '../../mail/mailer.service';
 import { LoginVerificationEmail } from '../../mail/templates/login-verification.template';
-import { BadRequest, NotFound } from '../../common/utils/exceptions';
 import { WelcomeEmail } from '../../mail/templates/welcome.template';
-import { SessionsService } from '../sessions/sessions.service';
-import type { VerifyLoginRequestDto } from './dtos/verify-login-request.dto';
-import type { CreateLoginRequestDto } from './dtos/create-login-request.dto';
-import { UsersService } from '../../users/users.service';
-import { UsersRepository } from '../../users/users.repository';
-import { VerificationCodesService } from '../../common/services/verification-codes.service';
-import type { LoginRequestDto } from './dtos/login-request.dto';
 import { CredentialsRepository } from '../../users/credentials.repository';
-import { TokensService } from '../../common/services/tokens.service';
+import { UsersRepository } from '../../users/users.repository';
+import { UsersService } from '../../users/users.service';
+import { SessionsService } from '../sessions/sessions.service';
+import type { CreateLoginRequestDto } from './dtos/create-login-request.dto';
+import type { LoginRequestDto } from './dtos/login-request.dto';
+import type { VerifyLoginRequestDto } from './dtos/verify-login-request.dto';
+import { LoginRequestsRepository } from './login-requests.repository';
+import { logger } from 'hono-pino';
 
 @injectable()
 export class LoginRequestsService {
@@ -31,7 +32,7 @@ export class LoginRequestsService {
     const existingUser = await this.usersRepository.findOneByEmail(email);
 
     if (!existingUser) {
-      throw NotFound('User not found');
+      throw BadRequest('Invalid credentials');
     }
 
     const credential = await this.credentialsRepository.findPasswordCredentialsByUserId(existingUser.id);
@@ -40,7 +41,11 @@ export class LoginRequestsService {
       throw BadRequest('Invalid credentials');
     }
 
-    if (!(await this.tokensService.verifyHashedToken(credential.secret_data, password))) {
+    try {
+      if (!(await this.tokensService.verifyHashedToken(credential.secret_data, password))) {
+        throw BadRequest('Invalid credentials');
+      }
+    } catch (error) {
       throw BadRequest('Invalid credentials');
     }
 
@@ -97,7 +102,7 @@ export class LoginRequestsService {
 
   private async authNewUser({ email }: { email: string }) {
     // create a new user
-    const user = await this.usersService.create(email);
+    const user = await this.usersService.createEmail(email);
 
     // send the welcome email
     await this.mailer.send({

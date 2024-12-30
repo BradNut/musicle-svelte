@@ -1,5 +1,7 @@
 import { customType, timestamp } from 'drizzle-orm/pg-core';
 import { NotFound } from './exceptions';
+import type { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import * as drizzleSchema from '../../databases/postgres/drizzle-schema';
 
 /* -------------------------------------------------------------------------- */
 /*                                 Repository                                 */
@@ -51,3 +53,5 @@ export const timestamps = {
     .defaultNow()
     .$onUpdateFn(() => new Date())
 };
+
+export type Transaction = Parameters<Parameters<NodePgDatabase<typeof drizzleSchema>["transaction"]>[0]>[0];

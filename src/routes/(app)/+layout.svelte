@@ -6,28 +6,24 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import * as Sheet from '$lib/components/ui/sheet/index.js';
-	import { createMutation } from '@tanstack/svelte-query';
-	import { authContext } from '$lib/hooks/session.svelte.js';
-	import { queryHandler } from '$lib/tanstack-query/index.js';
-	import { goto, invalidateAll } from '$app/navigation';
+	import { createMutation, createQuery, useQueryClient } from '@tanstack/svelte-query';
+	import { api } from '$lib/tanstack-query/index.js';
 	import UserAvatar from '$lib/components/user-avatar.svelte';
 	import ThemeDropdown from '$lib/components/theme-dropdown.svelte';
+	import { invalidateAll } from '$app/navigation';
 
 	const { children, data } = $props();
 
-	$effect.pre(() => {
-		authContext.setAuthedUser(data.authedUser);
-	});
+	const queryClient = useQueryClient();
+	const authedUserQuery = createQuery(api().users.me());
 
-	const logoutMutation = createMutation({
-		...queryHandler().iam.logout(),
+		const logoutMutation = createMutation({
+		...api().iam.logout(),
 		onSuccess: async () => {
-			await data.queryClient.invalidateQueries();
-			invalidateAll();
-			goto('/login');
+			await queryClient.invalidateQueries();
+			await invalidateAll();
 		}
 	});
-	queryHandler;
 </script>
 
 <div class="flex min-h-screen w-full flex-col">
@@ -86,11 +82,11 @@
 				</div>
 			</form>
 			<ThemeDropdown />
-			{#if !!data.authedUser}
+			{#if !!$authedUserQuery.data}
 				<DropdownMenu.Root>
 					<DropdownMenu.Trigger>
 						<Button variant="secondary" size="icon" class="rounded-lg">
-							<UserAvatar class="h-8 w-8 rounded-lg" user={data.authedUser} />
+							<UserAvatar class="h-8 w-8 rounded-lg" user={$authedUserQuery.data} />
 							<span class="sr-only">Toggle user menu</span>
 						</Button>
 					</DropdownMenu.Trigger>
@@ -100,8 +96,7 @@
 								<a class="w-full" href="/settings">Settings</a>
 							</DropdownMenu.Item>
 							<DropdownMenu.Separator />
-							<DropdownMenu.Item >Logout</DropdownMenu.Item>
-							onclick={$logoutMutation.mutate}
+							<DropdownMenu.Item onclick={$logoutMutation.mutate}>Logout</DropdownMenu.Item>
 						</DropdownMenu.Group>
 					</DropdownMenu.Content>
 				</DropdownMenu.Root>

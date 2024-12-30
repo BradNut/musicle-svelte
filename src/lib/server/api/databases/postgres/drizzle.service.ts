@@ -8,6 +8,7 @@ import { ConfigService } from '../../common/configs/config.service';
 export class DrizzleService {
   public db: NodePgDatabase<typeof drizzleSchema>;
   public schema: typeof drizzleSchema = drizzleSchema;
+
   constructor(private configService = inject(ConfigService)) {
     this.db = drizzle(
       new Pool({

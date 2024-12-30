@@ -1,19 +1,19 @@
 <script module lang="ts">
-	import { z } from 'zod';
+import { z } from 'zod';
 
-	export const loginSchema = z.object({
-		email: z.string().email(),
-	});
+export const loginSchema = z.object({
+  email: z.string().email(),
+});
 
-	export const loginPasswordSchema = z.object({
-		email: z.string().email(),
-		password: z.string({ required_error: 'Password is required' }),
-	})
+export const loginPasswordSchema = z.object({
+  email: z.string().email(),
+  password: z.string({ required_error: 'Password is required' }),
+});
 
-	export const verifySchema = z.object({
-		email: z.string().email(),
-		code: z.string().length(6)
-	});
+export const verifySchema = z.object({
+  email: z.string().email(),
+  code: z.string().length(6),
+});
 </script>
 
 <script lang="ts">
@@ -26,7 +26,7 @@
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 	import { goto } from '$app/navigation';
 	import ChevronLeftIcon from 'lucide-svelte/icons/chevron-left';
-	import { queryHandler } from '$lib/tanstack-query';
+	import { api } from '$lib/tanstack-query';
 	import * as InputOTP from '$lib/components/ui/input-otp/index.js';
 	import Separator from '@/components/ui/separator/separator.svelte';
 
@@ -41,19 +41,20 @@
 
 	/* ----------------------------------- Api ---------------------------------- */
 	const requestUsernamePasswordLoginMutation = createMutation({
-		...queryHandler().iam.requestUsernamePasswordLogin(),
+		...api().iam.requestUsernamePasswordLogin(),
 		onSuccess(_data, variables, _context) {
 			step = 'totp';
 			$loginPasswordForm.email = variables.json.email;
 			$loginPasswordForm.password = variables.json.password;
 		},
 		onError(error) {
-			loginPasswordErrors.set({ email: [error.message] });
+			const { message } = JSON.parse(error.message);
+			loginPasswordErrors.set({ email: [message] });
 		}
 	})
 
 	const requestMutation = createMutation({
-		...queryHandler().iam.requestLogin(),
+		...api().iam.requestLogin(),
 		onSuccess(_data, variables, _context) {
 			step = 'verify';
 			$verifyForm.email = variables.json.email;
@@ -65,7 +66,7 @@
 	});
 
 	const verifyMutation = createMutation({
-		...queryHandler().iam.verifyLogin(),
+		...api().iam.verifyLogin(),
 		async onSuccess() {
 			await queryClient.invalidateQueries();
 			goto('/');

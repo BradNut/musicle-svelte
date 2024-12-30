@@ -37,4 +37,8 @@ export class UsersRepository extends DrizzleRepository {
   async create(data: Create, db = this.drizzle.db) {
     return db.insert(users_table).values(data).returning().then(takeFirstOrThrow);
   }
+
+  async delete(id: string, db = this.drizzle.db) {
+    return db.delete(users_table).where(eq(users_table.id, id)).returning().then(takeFirstOrThrow);
+  }
 }

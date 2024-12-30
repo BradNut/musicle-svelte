@@ -12,8 +12,8 @@
 <QueryClientProvider client={data.queryClient}>
 	<ParaglideJS {i18n}>
 		<ModeWatcher />
-		<main>
-			{@render children()}
+		<main class="antialiased">
+			{@render children?.()}
 		</main>
 		<SvelteQueryDevtools />
 	</ParaglideJS>
